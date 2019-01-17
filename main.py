@@ -30,12 +30,21 @@ def draw_window(grid: Grid, surface: pygame.Surface):
 
     surface.blit(label, (top_left_x + play_width / 2 - (label.get_width() / 2), 30))
 
-    for i in range(len(grid.grid)):
-        for j in range(len(grid.grid[i])):
-            pygame.draw.rect(surface, grid.grid[i][j], (top_left_x + j* 30, top_left_y + i * 30, 30, 30), 0)
+    for i in range(grid.row):
+        for j in range(grid.column):
+            pygame.draw.rect(surface, grid.grid[i][j], (top_left_x + j * 30, top_left_y + i * 30, 30, 30), 0)
 
     # draw grid and border
-    grid.draw(surface, top_left_x, top_left_y, play_width, play_height)
+    draw_grid(grid, surface)
+
+def draw_grid(grid: Grid, surface: pygame.Surface):
+    sx = top_left_x
+    sy = top_left_y
+    for i in range(grid.row):
+        pygame.draw.line(surface, (128,128,128), (sx, sy + i * 30), (sx + play_width, sy + i * 30))  # horizontal lines
+        for j in range(grid.column):
+            pygame.draw.line(surface, (128,128,128), (sx + j * 30, sy), (sx + j * 30, sy + play_height))  # vertical lines
+
     pygame.draw.rect(surface, (255, 0, 0), (top_left_x, top_left_y, play_width, play_height), 5)
 
 def get_piece():
@@ -82,7 +91,7 @@ def main(surface: pygame.Surface):
             completed_lines = grid.check_completed_lines()
             score += completed_lines * completed_lines * 20
             print(score)
-            
+
             current_piece = next_piece
             next_piece = get_piece()
             change_piece = False

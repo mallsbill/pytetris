@@ -14,14 +14,6 @@ class Grid:
             if row > -1:
                 self.grid[row][column] = color
 
-    def draw(self, surface: pygame.Surface, top_left_x, top_left_y, play_width, play_height):
-        sx = top_left_x
-        sy = top_left_y
-        for i in range(self.row):
-            pygame.draw.line(surface, (128,128,128), (sx, sy+ i*30), (sx + play_width, sy + i * 30))  # horizontal lines
-            for j in range(self.column):
-                pygame.draw.line(surface, (128,128,128), (sx + j * 30, sy), (sx + j * 30, sy + play_height))  # vertical lines
-
     def check_position(self, piece_positions):
         accepted_positions = [[(j, i) for j in range(self.column) if self.grid[i][j] == (0,0,0)] for i in range(self.row)]
         accepted_positions = [j for sub in accepted_positions for j in sub]
