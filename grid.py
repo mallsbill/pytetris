@@ -23,7 +23,7 @@ class Grid:
 
         return True
 
-    def check_lost(self):
+    def check_game_over(self):
         for column in range(self.column):
             if self.grid[0][column] != (0,0,0):
                 return True
@@ -42,9 +42,7 @@ class Grid:
             if count_complete_column == self.column:
                 del self.grid[row]
                 line = [(0,0,0) for x in range(self.column)]
-                print(self.grid)
                 self.grid.insert(0, line)
-                print(self.grid)
                 completed_line += 1
 
         return completed_line

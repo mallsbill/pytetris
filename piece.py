@@ -7,8 +7,12 @@ class Piece:
         self.color = color
         self.rotation = 0
 
-    def rotate(self):
+    def rotateRight(self):
         self.rotation += 1
+        return self.get_positions()
+
+    def rotateLeft(self):
+        self.rotation -= 1
         return self.get_positions()
     
     def moveRight(self):
