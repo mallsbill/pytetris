@@ -53,6 +53,7 @@ def main(surface: pygame.Surface):
     clock = pygame.time.Clock()
     fall_time = 0
     fall_speed = 0.27
+    score = 0
 
     grid = Grid(10, 20)
 
@@ -78,6 +79,10 @@ def main(surface: pygame.Surface):
             if grid.check_lost() == True:
                 run = False
 
+            completed_lines = grid.check_completed_lines()
+            score += completed_lines * completed_lines * 20
+            print(score)
+            
             current_piece = next_piece
             next_piece = get_piece()
             change_piece = False

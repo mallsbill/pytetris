@@ -14,14 +14,6 @@ class Grid:
             if row > -1:
                 self.grid[row][column] = color
 
-    def updateLockedPositions(self, locked_positions):
-        for column in range(self.column):
-            for row in range(self.row):
-                if (row, column) in locked_positions:
-                    color = locked_positions[(row, column)]
-                    self.grid[row][column] = color
-
-
     def draw(self, surface: pygame.Surface, top_left_x, top_left_y, play_width, play_height):
         sx = top_left_x
         sy = top_left_y
@@ -47,3 +39,27 @@ class Grid:
                 return True
 
         return False
+
+    def check_completed_lines(self):
+        completed_line = 0
+
+        for row in range(self.row):
+            count_complete_column = 0
+            for column in range(self.column):
+                if self.grid[row][column] != (0,0,0):
+                    count_complete_column += 1
+            
+            if count_complete_column == self.column:
+                del self.grid[row]
+                line = [(0,0,0) for x in range(self.column)]
+                print(self.grid)
+                self.grid.insert(0, line)
+                print(self.grid)
+                completed_line += 1
+
+        return completed_line
+
+
+
+
+
