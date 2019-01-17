@@ -1,5 +1,3 @@
-import pygame
-from piece import Piece
 
 class Grid:
 
@@ -50,8 +48,3 @@ class Grid:
                 completed_line += 1
 
         return completed_line
-
-
-
-
-
